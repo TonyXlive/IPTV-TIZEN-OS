@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canapé TV</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- API Samsung (lecteur AVPlay) : fournie par la TV, absente dans un navigateur d'ordinateur -->
+  <script src="$WEBAPIS/webapis/webapis.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="loader" class="loader">
+    <div class="brand huge">canapé</div>
+    <div class="spinner"></div>
+    <div id="loader-msg" class="loader-msg">Chargement…</div>
+    <div id="loader-error" class="loader-error">
+      <div id="loader-error-text" class="loader-error-text"></div>
+      <div class="loader-error-keys"><span id="loader-retry" class="loader-key"><span class="k">OK</span> Réessayer</span> &nbsp;&nbsp; <span id="loader-edit" class="loader-key"><span class="k">▼</span> Modifier la playlist</span> &nbsp;&nbsp; <span class="loader-key"><span class="k">RETOUR</span> Quitter</span></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/util.js"></script>
+  <script src="js/tizen.js"></script>
+  <script src="js/sources.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/screens.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

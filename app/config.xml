@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://canapetv.app/tizen" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="CanapeTVfr.CanapeTV" package="CanapeTVfr" required_version="2.3"/>
+    <content src="index.html"/>
+    <name>Canapé TV</name>
+    <description>Lecteur IPTV (playlists M3U et comptes Xtream Codes). Ne contient aucune chaîne.</description>
+    <author>Canapé TV</author>
+    <icon src="icon.png"/>
+    <!-- L'appli doit pouvoir joindre n'importe quel fournisseur IPTV (playlists, API Xtream, guide, flux) -->
+    <access origin="*" subdomains="true"/>
+    <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <tizen:profile name="tv-samsung"/>
+    <tizen:setting screen-orientation="landscape" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+    <tizen:metadata key="http://samsung.com/tv/metadata/prelaunch.support" value="false"/>
+</widget>

@@ -1,0 +1,482 @@
+/* Canapé TV (Samsung Tizen) — thème sombre et chaleureux, pensé pour être lu à 3 mètres.
+   Tout est en rem : 1 rem = 16 px sur un écran de 1920 px (voir main.js).
+   Pas de variables CSS, de grilles ni de « gap » : les TV Samsung de 2016-2017 (Tizen 2.4 / 3.0) ne les comprennent pas. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #0c0e13; color: #f3efe7;
+  font-family: "SamsungOne", "Samsung Sans", "TizenSans", "Museo Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none; user-select: none;
+}
+
+input { -webkit-user-select: text; user-select: text; }
+
+#app { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
+
+.screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; background: #0c0e13; }
+
+/* ---------------------------------------------------------------- marque */
+
+.brand {
+  font-weight: 800; font-size: 2.1rem; letter-spacing: -0.06rem; color: #f3efe7;
+  text-transform: lowercase;
+}
+.brand:after { content: "."; color: #ffb547; }
+.brand.big { font-size: 3rem; margin-bottom: 1.4rem; }
+.brand.huge { font-size: 6rem; margin-bottom: 3rem; }
+
+/* ---------------------------------------------------------------- touches et boutons */
+
+.k {
+  display: inline-block; min-width: 2.2rem; padding: 0.15rem 0.6rem; margin-right: 0.4rem;
+  border: 0.12rem solid rgba(243, 239, 231, 0.45); border-radius: 0.4rem;
+  font-size: 1.05rem; font-weight: 700; text-align: center; vertical-align: middle;
+}
+.k-red { min-width: 1.6rem; height: 1.2rem; padding: 0; border: 0; background: #e5484d; border-radius: 0.3rem; }
+
+.btn {
+  display: inline-block; padding: 1rem 2.2rem; margin-right: 1rem; border-radius: 0.6rem;
+  background: rgba(243, 239, 231, 0.12); color: #f3efe7;
+  font-size: 1.55rem; font-weight: 700; white-space: nowrap;
+  transition: transform 0.15s, background 0.15s;
+}
+.btn.focus { background: #f3efe7; color: #0c0e13; transform: scale(1.05); }
+.btn.primary.focus { background: #ffb547; }
+.btn.danger.focus { background: #e5484d; color: #fff; }
+
+/* ---------------------------------------------------------------- chargement */
+
+.loader {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 50;
+  display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column;
+  -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, #1d2230 0%, #0c0e13 65%);
+}
+.loader-msg { margin-top: 2.2rem; font-size: 1.7rem; color: #b9bdc7; }
+.loader-error { display: none; margin-top: 2rem; max-width: 70rem; text-align: center; }
+.loader-error-text {
+  font-size: 1.5rem; line-height: 1.5; color: #ffd3b3; background: rgba(229, 72, 77, 0.12);
+  border: 0.1rem solid rgba(229, 72, 77, 0.4); border-radius: 0.8rem; padding: 1.4rem 2rem; margin-bottom: 2rem;
+}
+.loader-error-keys { font-size: 1.4rem; color: #b9bdc7; }
+.loader-key { display: inline-block; padding: 0.4rem 0.8rem; border-radius: 0.6rem; }
+
+.spinner {
+  width: 4.2rem; height: 4.2rem; border-radius: 50%;
+  border: 0.42rem solid rgba(243, 239, 231, 0.12); border-top-color: #ffb547;
+  -webkit-animation: spin 0.9s linear infinite; animation: spin 0.9s linear infinite;
+}
+@-webkit-keyframes spin { to { -webkit-transform: rotate(360deg); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------------------------------------------------------------- menu du haut */
+
+.nav {
+  position: absolute; top: 0; left: 0; right: 0; height: 6.5rem; z-index: 5;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  padding: 0 4.5rem;
+  background: linear-gradient(to bottom, rgba(12, 14, 19, 0.95) 0%, rgba(12, 14, 19, 0) 100%);
+}
+.nav .brand { margin-right: 3.5rem; }
+.nav-tabs { display: -webkit-flex; display: flex; -webkit-flex: 1; flex: 1; }
+.nav-tab {
+  font-size: 1.45rem; font-weight: 600; color: rgba(243, 239, 231, 0.55);
+  padding: 0.6rem 1.2rem; margin-right: 0.5rem; border-radius: 2rem;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-tab.active { color: #f3efe7; }
+.nav-tab.active:after {
+  content: ""; display: block; height: 0.22rem; margin-top: 0.3rem; border-radius: 0.2rem; background: #ffb547;
+}
+.nav-tab.focus { background: #f3efe7; color: #0c0e13; }
+.nav-tab.focus:after { display: none; }
+.clock { font-size: 1.6rem; font-weight: 600; color: rgba(243, 239, 231, 0.75); }
+
+/* ---------------------------------------------------------------- bannière */
+
+.hero { position: absolute; top: 0; left: 0; right: 0; height: 37.5rem; overflow: hidden; }
+.hero-bg {
+  position: absolute; top: 0; right: 0; width: 72%; height: 100%;
+  background-size: cover; background-position: center 25%; background-repeat: no-repeat;
+  opacity: 0.55; transition: opacity 0.3s;
+}
+.hero-bg.is-logo { opacity: 0; }
+.hero-bg.is-poster { opacity: 0.25; }
+.hero-bg.is-backdrop { opacity: 0.75; }
+.hero-shade {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(to right, #0c0e13 26%, rgba(12, 14, 19, 0.75) 48%, rgba(12, 14, 19, 0) 80%),
+    linear-gradient(to top, #0c0e13 2%, rgba(12, 14, 19, 0) 45%);
+}
+.hero-logo { position: absolute; right: 6rem; top: 9rem; }
+.hero-logo-img { position: relative; overflow: hidden; border-radius: 1rem; box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.6); }
+.hero-logo-img.logo { width: 30rem; height: 16.9rem; background: #181c26; }
+.hero-logo-img.logo img { object-fit: contain; padding: 2.4rem 3rem; }
+.hero-logo-img.poster { width: 16rem; height: 24rem; }
+.hero-text { position: absolute; left: 4.5rem; top: 9.5rem; width: 62rem; }
+.hero-kicker {
+  font-size: 1.2rem; font-weight: 700; letter-spacing: 0.18rem; text-transform: uppercase; color: #ffb547;
+  margin-bottom: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hero-title {
+  font-size: 4.2rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.08rem; margin-bottom: 1rem;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.hero-meta { font-size: 1.4rem; color: #cfd2d9; margin-bottom: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hero-desc {
+  font-size: 1.45rem; line-height: 1.45; color: #dcdfe5; max-width: 58rem;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.hero-desc-small { font-size: 1.25rem; color: #a9aebb; margin-top: 0.5rem; }
+.hero-next { font-size: 1.3rem; color: #a9aebb; margin-top: 0.9rem; }
+.live-dot {
+  display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 50%; background: #e5484d;
+  margin-right: 0.8rem; vertical-align: middle; box-shadow: 0 0 0.8rem rgba(229, 72, 77, 0.8);
+}
+
+/* ---------------------------------------------------------------- rangées */
+
+.rows { position: absolute; top: 35rem; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.browse.in-nav .rows { opacity: 0.55; }
+.rows-inner { position: absolute; top: 0; left: 4.5rem; right: 0; transition: transform 0.28s ease-out; }
+.row { position: absolute; left: 0; right: 0; transition: opacity 0.25s; }
+.row.row-past { opacity: 0; }
+.row-title { font-size: 1.6rem; font-weight: 700; height: 3.1rem; line-height: 2.6rem; color: #e9e6df; white-space: nowrap; }
+.row-count { font-size: 1.15rem; font-weight: 600; color: rgba(243, 239, 231, 0.35); margin-left: 1rem; }
+.track { position: relative; transition: transform 0.22s ease-out; }
+
+.tile { position: absolute; top: 0; transition: transform 0.18s ease-out; -webkit-transform-origin: 0 40%; transform-origin: 0 40%; }
+.tile-art { position: relative; overflow: hidden; border-radius: 0.6rem; background: #181c26; }
+.tile-art img, .detail-poster img, .hero-logo-img img, .episode-thumb img, .osd-logo img, .chan-row-logo img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.25s;
+}
+.img-fallback {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center;
+  font-size: 2.4rem; font-weight: 800; color: rgba(243, 239, 231, 0.85); letter-spacing: 0.1rem; text-align: center; padding: 0.5rem;
+}
+
+.tile-live { width: 17.5rem; }
+.tile-live .tile-art { height: 9.85rem; background: linear-gradient(160deg, #222838 0%, #151924 100%); }
+.tile-live .tile-art img { object-fit: contain; padding: 1.3rem 1.8rem; }
+.tile-num {
+  position: absolute; top: 0.5rem; left: 0.6rem; z-index: 2; font-size: 1rem; font-weight: 700;
+  color: rgba(243, 239, 231, 0.7); background: rgba(12, 14, 19, 0.55); padding: 0.1rem 0.5rem; border-radius: 0.3rem;
+}
+.tile-poster { width: 11.6rem; }
+.tile-poster .tile-art { height: 17.4rem; }
+.tile-poster .img-fallback { font-size: 2rem; }
+.tile-wide { width: 20rem; }
+.tile-wide .tile-art { height: 11.25rem; }
+
+.tile-cap { padding-top: 0.6rem; }
+.tile-name { font-size: 1.2rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #e9e6df; }
+.tile-sub { font-size: 1.05rem; color: #9aa0ad; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 0.2rem; }
+.tile-title {
+  font-size: 1.05rem; color: #9aa0ad; margin-top: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tile-resume {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 0.45rem 0.6rem; text-align: center;
+  font-size: 1rem; font-weight: 700; color: #ffb547; background: rgba(12, 14, 19, 0.88);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tile-bar { display: none; height: 0.22rem; margin-top: 0.4rem; background: rgba(243, 239, 231, 0.15); border-radius: 0.2rem; overflow: hidden; }
+.tile-bar-fill { height: 100%; background: #ffb547; }
+.tile-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 0.35rem; background: rgba(12, 14, 19, 0.6); z-index: 2; }
+.tile-progress-fill { height: 100%; background: #ffb547; }
+.tile-fav { position: absolute; top: 0.4rem; right: 0.6rem; z-index: 3; font-size: 1.3rem; color: #e5484d; text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.8); }
+
+.tile.focus { transform: scale(1.08); -webkit-transform: scale(1.08); z-index: 3; }
+.tile.focus .tile-art { box-shadow: 0 0 0 0.25rem #ffb547, 0 1.2rem 2.6rem rgba(0, 0, 0, 0.65); }
+.tile.focus .tile-name { color: #fff; }
+.tile.focus .tile-title { color: #f3efe7; }
+
+.empty {
+  display: none; position: absolute; top: 18rem; left: 4.5rem; right: 4.5rem; text-align: center;
+  font-size: 1.8rem; line-height: 1.5; color: #9aa0ad;
+}
+.hint { position: absolute; right: 3.5rem; bottom: 1.2rem; font-size: 1.15rem; color: rgba(243, 239, 231, 0.6); z-index: 4; background: rgba(12, 14, 19, 0.88); padding: 0.5rem 1.2rem; border-radius: 2rem; }
+.hint:empty { display: none; }
+
+/* ---------------------------------------------------------------- fiches film et série */
+
+.detail-bg {
+  position: absolute; top: 0; right: 0; width: 75%; height: 100%;
+  background-size: cover; background-position: center 20%; opacity: 0.22;
+}
+.detail-bg.is-backdrop { opacity: 0.6; }
+.detail-shade {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(to right, #0c0e13 30%, rgba(12, 14, 19, 0.7) 55%, rgba(12, 14, 19, 0.15) 100%),
+    linear-gradient(to top, #0c0e13 0%, rgba(12, 14, 19, 0) 40%);
+}
+.detail-body {
+  position: absolute; left: 4.5rem; top: 8rem; right: 4.5rem;
+  display: -webkit-flex; display: flex; -webkit-align-items: flex-start; align-items: flex-start;
+}
+.detail-poster { position: relative; width: 22rem; height: 33rem; border-radius: 0.9rem; overflow: hidden; -webkit-flex-shrink: 0; flex-shrink: 0; box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.6); background: #181c26; }
+.detail-info { margin-left: 4rem; max-width: 70rem; }
+.detail-title { font-size: 4.4rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.08rem; margin-bottom: 1.1rem; }
+.detail-plot { font-size: 1.55rem; line-height: 1.5; color: #dcdfe5; margin-bottom: 1.4rem; max-height: 14rem; overflow: hidden; }
+.detail-plot.short { max-height: 7rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.detail-credits { font-size: 1.25rem; line-height: 1.6; color: #9aa0ad; margin-bottom: 2.2rem; white-space: pre-line; max-height: 6rem; overflow: hidden; }
+.detail-buttons { margin-top: 0.5rem; }
+
+.series-head { position: absolute; left: 4.5rem; top: 5rem; width: 80rem; }
+.season-tabs { position: absolute; left: 4.5rem; right: 4.5rem; top: 31rem; white-space: nowrap; overflow: hidden; }
+.season-tab {
+  display: inline-block; font-size: 1.45rem; font-weight: 700; color: rgba(243, 239, 231, 0.55);
+  padding: 0.6rem 1.4rem; margin-right: 0.6rem; border-radius: 2rem;
+}
+.season-tab.active { color: #f3efe7; background: rgba(243, 239, 231, 0.12); }
+.season-tab.focus { background: #f3efe7; color: #0c0e13; }
+.episodes { position: absolute; left: 4.5rem; right: 4.5rem; top: 35.5rem; bottom: 0; overflow: hidden; padding-bottom: 3rem; }
+.episode {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  padding: 0.9rem; margin-bottom: 0.6rem; border-radius: 0.8rem; transition: background 0.15s;
+}
+.episode.focus { background: rgba(243, 239, 231, 0.1); box-shadow: inset 0 0 0 0.2rem #ffb547; }
+.episode-thumb { position: relative; width: 17rem; height: 9.6rem; border-radius: 0.6rem; overflow: hidden; -webkit-flex-shrink: 0; flex-shrink: 0; background: #181c26; }
+.episode-text { margin-left: 2rem; min-width: 0; }
+.episode-title { font-size: 1.5rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.episode-meta { font-size: 1.15rem; color: #9aa0ad; margin-top: 0.3rem; }
+.episode-meta.seen { color: #ffb547; }
+.episode-plot { font-size: 1.2rem; color: #b9bdc7; margin-top: 0.4rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.empty-inline { font-size: 1.5rem; color: #9aa0ad; padding: 2rem 0; }
+
+/* ---------------------------------------------------------------- recherche */
+
+.search-top {
+  position: absolute; top: 0; left: 0; right: 0; height: 12rem; padding: 2.6rem 4.5rem 0;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+}
+.search-top .brand { margin-right: 3rem; }
+.search-input {
+  -webkit-flex: 1; flex: 1; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  height: 5.4rem; padding: 0 2rem; border-radius: 0.9rem; background: #181c26; border: 0.2rem solid transparent;
+}
+.search-input.focus { border-color: #ffb547; }
+.search-icon { font-size: 2.4rem; color: #9aa0ad; margin-right: 1.2rem; }
+.search-input input, .field input {
+  -webkit-flex: 1; flex: 1; width: 100%; background: transparent; border: 0; outline: 0;
+  color: #f3efe7; font-size: 1.8rem; font-family: inherit;
+}
+.search-input input::-webkit-input-placeholder, .field input::-webkit-input-placeholder { color: #5f6573; }
+.search-status { position: absolute; top: 12.5rem; left: 4.5rem; font-size: 1.35rem; color: #9aa0ad; }
+.search-rows { top: 16rem; }
+
+/* ---------------------------------------------------------------- réglages et formulaire */
+
+.settings-head { position: absolute; top: 0; left: 0; right: 0; height: 9rem; padding: 0 4.5rem; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; }
+.settings-title { font-size: 2.4rem; font-weight: 700; margin-left: 3rem; color: #cfd2d9; }
+.settings-list { position: absolute; top: 9rem; bottom: 0; left: 50%; width: 76rem; margin-left: -38rem; overflow: hidden; padding-bottom: 6rem; }
+.settings-section {
+  font-size: 1.15rem; font-weight: 700; letter-spacing: 0.18rem; text-transform: uppercase; color: #ffb547;
+  padding: 2rem 1.6rem 0.8rem;
+}
+.settings-item {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: space-between; justify-content: space-between;
+  min-height: 4.8rem; padding: 0.8rem 1.6rem; border-radius: 0.7rem; margin-bottom: 0.3rem;
+}
+.settings-label { font-size: 1.6rem; font-weight: 600; }
+.settings-value { font-size: 1.35rem; color: #9aa0ad; margin-left: 2rem; text-align: right; max-width: 40rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.settings-item.focus { background: #f3efe7; color: #0c0e13; }
+.settings-item.focus .settings-value { color: #3d4250; }
+
+.editor { background: radial-gradient(ellipse at 50% 0%, #1d2230 0%, #0c0e13 60%); }
+.editor-box { position: absolute; top: 5rem; left: 50%; width: 80rem; margin-left: -40rem; }
+.editor-title { font-size: 2.6rem; font-weight: 800; margin-bottom: 0.8rem; }
+.editor-help { font-size: 1.35rem; line-height: 1.5; color: #b9bdc7; margin-bottom: 1.6rem; }
+.editor-form { margin-top: 1.6rem; }
+.field {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  min-height: 5.2rem; padding: 0 1.8rem; margin-bottom: 0.8rem; border-radius: 0.8rem;
+  background: #181c26; border: 0.2rem solid transparent;
+}
+.field.focus { border-color: #ffb547; background: #1f2431; }
+.field-label { width: 25rem; -webkit-flex-shrink: 0; flex-shrink: 0; font-size: 1.4rem; font-weight: 600; color: #b9bdc7; }
+.field input { font-size: 1.55rem; }
+.segmented { display: -webkit-flex; display: flex; }
+.seg { font-size: 1.4rem; font-weight: 700; padding: 0.55rem 1.4rem; border-radius: 2rem; margin-right: 0.6rem; color: #9aa0ad; }
+.seg.on { background: #ffb547; color: #0c0e13; }
+.editor-actions { margin-top: 1.4rem; }
+.editor-actions .btn { border: 0.2rem solid transparent; }
+.editor-actions .btn.focus { transform: none; }
+
+/* ---------------------------------------------------------------- fenêtres */
+
+.modal {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 60;
+  background: rgba(6, 7, 10, 0.78);
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center;
+}
+.modal-box { min-width: 50rem; max-width: 80rem; padding: 3.2rem 3.6rem; border-radius: 1.2rem; background: #181c26; box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.6); }
+.modal-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
+.modal-text { font-size: 1.35rem; line-height: 1.5; color: #b9bdc7; margin-bottom: 1.8rem; }
+.modal-buttons { margin-top: 1.6rem; }
+.pin-row { display: -webkit-flex; display: flex; -webkit-justify-content: center; justify-content: center; margin: 1rem 0; }
+.pin-cell {
+  width: 5.6rem; height: 7rem; margin: 0 0.6rem; border-radius: 0.8rem; background: #0c0e13;
+  font-size: 3.4rem; font-weight: 800; line-height: 7rem; text-align: center; border: 0.2rem solid #2a3040;
+}
+.pin-cell.focus { border-color: #ffb547; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 4rem; z-index: 70; width: 60rem; margin-left: -30rem; text-align: center;
+  font-size: 1.5rem; font-weight: 600; padding: 1.1rem 2rem; border-radius: 3rem;
+  background: #f3efe7; color: #0c0e13; opacity: 0; transform: translateY(1rem); transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ---------------------------------------------------------------- lecteur */
+
+.player { background: #000; }
+.player video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; }
+/* Lecteur Samsung (AVPlay) : l'image est dessinée SOUS la page, il faut donc que tout soit transparent par-dessus. */
+.player object.avplayer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+html.avplay-on, html.avplay-on body, html.avplay-on #app, html.avplay-on .player.is-avplay { background: transparent; }
+.spinner-wrap {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 2;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center;
+}
+.player-error {
+  display: none; position: absolute; top: 50%; left: 50%; width: 70rem; margin-left: -35rem; margin-top: -9rem; z-index: 3;
+  padding: 3rem; border-radius: 1.2rem; background: rgba(24, 28, 38, 0.94); text-align: center;
+}
+.player-error-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; }
+.player-error-text { font-size: 1.4rem; line-height: 1.5; color: #b9bdc7; }
+.player-error-text.dim { color: #6f7583; margin-top: 1.2rem; }
+
+.osd { position: absolute; left: 0; right: 0; z-index: 4; opacity: 0; transition: opacity 0.25s; padding: 0 4.5rem; }
+.player.osd-on .osd { opacity: 1; }
+.osd-top {
+  top: 0; height: 16rem; padding-top: 3.2rem;
+  display: -webkit-flex; display: flex; -webkit-align-items: flex-start; align-items: flex-start; -webkit-justify-content: space-between; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
+}
+.osd-chan { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; }
+.osd-logo { position: relative; width: 14rem; height: 7.9rem; border-radius: 0.6rem; overflow: hidden; background: rgba(24, 28, 38, 0.9); }
+.osd-logo img { object-fit: contain; padding: 0.9rem 1.2rem; }
+.osd-chan-text { margin-left: 2rem; }
+.osd-num { font-size: 1.2rem; font-weight: 700; color: #ffb547; letter-spacing: 0.1rem; text-transform: uppercase; }
+.osd-name { font-size: 2.6rem; font-weight: 800; margin-top: 0.2rem; }
+.osd-group { font-size: 1.25rem; color: #b9bdc7; margin-top: 0.2rem; }
+.osd-clock { font-size: 2.2rem; font-weight: 700; }
+.osd-fav { position: absolute; right: 12rem; top: 3.4rem; font-size: 2rem; color: #e5484d; }
+.osd-bottom {
+  bottom: 0; padding-top: 6rem; padding-bottom: 2.6rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0) 100%);
+}
+.osd-epg { max-width: 90rem; margin-bottom: 1.4rem; }
+.osd-epg-empty { font-size: 1.4rem; color: #9aa0ad; }
+.osd-epg-line { font-size: 1.9rem; font-weight: 700; }
+.osd-epg-time { color: #ffb547; margin-right: 1.4rem; font-weight: 600; }
+.epg-bar { height: 0.3rem; margin: 0.8rem 0; background: rgba(243, 239, 231, 0.2); border-radius: 0.2rem; overflow: hidden; width: 50rem; }
+.epg-fill { height: 100%; background: #ffb547; }
+.osd-epg-desc { font-size: 1.3rem; line-height: 1.45; color: #cfd2d9; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.osd-epg-next { font-size: 1.35rem; color: #b9bdc7; margin-top: 0.8rem; }
+.osd-keys { font-size: 1.1rem; color: rgba(243, 239, 231, 0.5); white-space: pre; }
+.osd-title { font-size: 2.4rem; font-weight: 800; margin-bottom: 1.4rem; }
+.vod-bar { position: relative; height: 0.45rem; background: rgba(243, 239, 231, 0.2); border-radius: 0.3rem; }
+.vod-fill { height: 100%; background: #ffb547; border-radius: 0.3rem; }
+.vod-seek { position: absolute; top: -0.65rem; width: 1.7rem; height: 1.7rem; margin-left: -0.85rem; border-radius: 50%; background: #f3efe7; }
+.vod-times {
+  display: -webkit-flex; display: flex; -webkit-justify-content: space-between; justify-content: space-between;
+  font-size: 1.35rem; font-weight: 600; color: #cfd2d9; margin: 1rem 0 1.2rem;
+}
+.vod-state { color: #ffb547; }
+.num-entry {
+  display: none; position: absolute; top: 3rem; right: 4.5rem; z-index: 6;
+  font-size: 5rem; font-weight: 800; color: #ffb547; text-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.9);
+}
+
+.chan-list {
+  position: absolute; top: 0; left: 0; bottom: 0; width: 46rem; z-index: 5; padding: 3rem 2rem 2rem 3rem;
+  background: linear-gradient(to right, rgba(12, 14, 19, 0.97) 75%, rgba(12, 14, 19, 0) 100%);
+  -webkit-transform: translateX(-48rem); transform: translateX(-48rem); transition: transform 0.22s ease-out;
+}
+.player.list-on .chan-list { -webkit-transform: translateX(0); transform: translateX(0); }
+.chan-list-title { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.15rem; text-transform: uppercase; color: #ffb547; margin-bottom: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chan-row { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; height: 5.2rem; padding: 0 1rem; border-radius: 0.6rem; margin-bottom: 0.2rem; }
+.chan-row.focus { background: #f3efe7; color: #0c0e13; }
+.chan-row.playing .chan-row-name:before { content: "● "; color: #e5484d; }
+.chan-row-num { width: 3.6rem; font-size: 1.2rem; font-weight: 700; color: #9aa0ad; }
+.chan-row.focus .chan-row-num { color: #3d4250; }
+.chan-row-logo { position: relative; width: 6.4rem; height: 3.6rem; border-radius: 0.3rem; overflow: hidden; background: #181c26; -webkit-flex-shrink: 0; flex-shrink: 0; }
+.chan-row-logo img { object-fit: contain; padding: 0.3rem; }
+.chan-row-logo .img-fallback { font-size: 1rem; }
+.chan-row-text { margin-left: 1.2rem; min-width: 0; }
+.chan-row-name { font-size: 1.35rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chan-row-sub { font-size: 1.05rem; color: #9aa0ad; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chan-row.focus .chan-row-sub { color: #3d4250; }
+.chan-list-foot { font-size: 1.1rem; color: #6f7583; margin-top: 1rem; }
+
+/* ---------------------------------------------------------------- audio et sous-titres */
+
+.osd-btn {
+  display: inline-block; font-size: 1.25rem; font-weight: 700; padding: 0.5rem 1.2rem; margin-bottom: 1rem;
+  border-radius: 2rem; background: rgba(243, 239, 231, 0.14); color: #f3efe7;
+}
+.subtitles {
+  display: none; position: absolute; left: 10%; right: 10%; bottom: 7rem; z-index: 3; text-align: center; white-space: pre-line;
+  font-size: 2.3rem; font-weight: 700; line-height: 1.3; color: #fff;
+  text-shadow: 0 0 0.4rem #000, 0 0 0.4rem #000, 0.15rem 0.15rem 0.2rem #000;
+}
+.player.osd-on .subtitles { bottom: 17rem; }
+.track-panel {
+  display: none; position: absolute; top: 0; right: 0; bottom: 0; width: 64rem; z-index: 6; padding: 5rem 4rem;
+  background: linear-gradient(to left, rgba(12, 14, 19, 0.97) 70%, rgba(12, 14, 19, 0) 100%);
+}
+.player.tracks-on .track-panel { display: block; }
+.track-cols { display: -webkit-flex; display: flex; }
+.track-col { -webkit-flex: 1; flex: 1; margin-right: 2rem; }
+.track-title { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.15rem; text-transform: uppercase; color: #ffb547; margin-bottom: 1.2rem; }
+.track-item { font-size: 1.55rem; font-weight: 600; padding: 0.9rem 1.2rem; border-radius: 0.6rem; margin-bottom: 0.3rem; color: #cfd2d9; }
+.track-item.on { color: #fff; }
+.track-item.focus { background: #f3efe7; color: #0c0e13; }
+.track-empty { font-size: 1.3rem; color: #6f7583; padding: 0.9rem 0; }
+.track-keys { position: absolute; left: 4rem; bottom: 3rem; font-size: 1.1rem; color: rgba(243, 239, 231, 0.5); white-space: pre; }
+.player.tracks-on .osd-keys, .player.tracks-on .osd-btn { visibility: hidden; }
+
+/* ---------------------------------------------------------------- épisode suivant */
+
+.osd-btns .osd-btn { margin-right: 1rem; }
+.osd-next { background: rgba(255, 181, 71, 0.22); }
+.next-card {
+  display: none; position: absolute; right: 4.5rem; bottom: 15rem; z-index: 5; width: 42rem; padding: 2rem 2.4rem;
+  border-radius: 1rem; background: rgba(24, 28, 38, 0.95); box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.6);
+}
+.next-card-kicker { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.15rem; text-transform: uppercase; color: #ffb547; }
+.next-card-title { font-size: 1.7rem; font-weight: 800; margin: 0.6rem 0 1.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.next-card-btn { display: inline-block; font-size: 1.5rem; font-weight: 800; padding: 0.9rem 2rem; border-radius: 0.6rem; background: #f3efe7; color: #0c0e13; }
+.next-card-keys { font-size: 1.05rem; color: rgba(243, 239, 231, 0.55); margin-top: 1rem; white-space: pre; }
+.player.tracks-on .next-card { display: none !important; }
+.player.tracks-on .osd-btns { visibility: hidden; }
+
+/* ---------------------------------------------------------------- barre de commandes du lecteur */
+
+.ctrl-row {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center;
+  margin: 0.4rem 0 1.4rem;
+}
+.ctrl { color: #f3efe7; margin: 0 0.8rem; -webkit-transition: -webkit-transform 0.12s, background 0.12s; transition: transform 0.12s, background 0.12s; }
+.ctrl-icon { display: inline-block; vertical-align: middle; }
+.ctrl-big { width: 5.6rem; height: 5.6rem; border-radius: 50%; background: rgba(243, 239, 231, 0.14); padding: 1.15rem; }
+.ctrl-big .ctrl-icon { width: 3.3rem; height: 3.3rem; }
+.ctrl-pause { width: 7rem; height: 7rem; padding: 1.5rem; }
+.ctrl-pause .ctrl-icon { width: 4rem; height: 4rem; }
+.ctrl-pill { padding: 0.8rem 1.6rem 0.8rem 1.2rem; border-radius: 3rem; background: rgba(243, 239, 231, 0.14); white-space: nowrap; }
+.ctrl-pill .ctrl-icon { width: 2.2rem; height: 2.2rem; margin-right: 0.7rem; }
+.ctrl-label { display: inline-block; vertical-align: middle; font-size: 1.35rem; font-weight: 700; }
+.ctrl.focus { background: #f3efe7; color: #0c0e13; -webkit-transform: scale(1.1); transform: scale(1.1); }
+.vod-bar.focus { height: 0.7rem; }
+.vod-bar.focus .vod-seek { width: 2.4rem; height: 2.4rem; top: -0.85rem; margin-left: -1.2rem; background: #ffb547; box-shadow: 0 0 0 0.3rem rgba(255, 181, 71, 0.35); }
+.player.tracks-on .ctrl-row { visibility: hidden; }
+.next-card { bottom: 22rem; }
+.playing .toast { bottom: auto; top: 3rem; }
